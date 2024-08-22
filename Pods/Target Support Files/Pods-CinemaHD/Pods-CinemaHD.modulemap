@@ -1,0 +1,6 @@
+framework module Pods_CinemaHD {
+  umbrella header "Pods-CinemaHD-umbrella.h"
+
+  export *
+  module * { export * }
+}
