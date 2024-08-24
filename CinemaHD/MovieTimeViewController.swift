@@ -11,6 +11,7 @@ class MovieTimeViewController: UIViewController {
     
     @IBOutlet weak var movieTimeTablView: UITableView!
     var movieTimes: [[String?]] = []
+    var movieDates: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()

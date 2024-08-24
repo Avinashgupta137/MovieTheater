@@ -11,6 +11,8 @@ class ScheduleViewController: UIViewController {
     
     @IBOutlet weak var scheduleTablView: UITableView!
     var schedule: [Schedule] = []
+    var selectedMovieId: String?
+    var showTimings: [[String]] = [[]]
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -38,8 +40,16 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         return cell ?? UITableViewCell()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        
+        let showTimings = schedule[indexPath.row].showTimings.filter { showTiming in
+            if showTiming[1] == selectedMovieId {
+                return true // Return true to include this showTiming in the filtered results
+            }
+            return false // Return false to exclude this showTiming
+        } ?? [[]]
         if let movieDetailsVC = storyboard?.instantiateViewController(withIdentifier: "MovieTimeViewController") as? MovieTimeViewController {
-            movieDetailsVC.movieTimes = schedule[indexPath.row].showTimings
+            movieDetailsVC.movieTimes = showTimings
             navigationController?.pushViewController(movieDetailsVC, animated: true)
         }
             
